@@ -9,9 +9,9 @@ if [[ ! -z "$SHAREREPS" ]]
 then
 for SHAREREP in "${SHAREREPS[@]}"
 do
-CONTENT=`cat $LOG | grep -E 'folder replication|$SHAREREP' | tail -1`
+CONTENT=`cat $LOG | grep -F 'folder replication' | grep -F "$SHAREREP" | tail -1`
 if [ -z "${CONTENT}" ]; then
-	CONTENT=`cat $LOG | grep -E 'folder replication|$SHAREREP' | tail -1`
+	CONTENT=`cat $LOG | grep -F 'folder replication' | grep -F $SHAREREP | tail -1`
 fi
 if [[ $CONTENT == *"completed"* ]]; then
 	STATUS="1"
@@ -32,9 +32,9 @@ if [[ ! -z "$LUNREPS" ]]
 then
 for LUNREP in "${LUNREPS[@]}"
 do
-CONTENT=`cat $LOG | grep -E 'folder replication|$LUNREP' | tail -1`
+CONTENT=`cat $LOG | grep -F 'LUN replication' | grep -F $LUNREP | tail -1`
 if [ -z "${CONTENT}" ]; then
-	CONTENT=`cat $LOG | grep -E 'folder replication|$LUNREP' | tail -1`
+	CONTENT=`cat $LOG | grep -F 'LUN replication' | grep -F $LUNREP | tail -1`
 fi
 if [[ $CONTENT == *"completed"* ]]; then
 	STATUS="1"
