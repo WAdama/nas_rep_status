@@ -6,7 +6,7 @@ The sensor will show the status and time passed since the last replication. The 
 
 Sensor has to be created in PRTG on your Synology device.
 
-Sensor tested on DS 918+ with DSM 6.2.4-25556.
+Sensor tested on DS 918+ with DSM 6.2.4-25556 and 7.0-41890.
 
 ### Prerequisites
 
