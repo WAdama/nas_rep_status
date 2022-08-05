@@ -42,8 +42,6 @@ The configuration file must contain the following entries according to your back
 ```
 SHAREREPS=("Share1" "Share2" "Share3$")
 LUNREPS=("LUN1" "LUN2" "LUN3")
-LOG="/var/log/synolog/synodr.log"
-LOGROTATED="/var/log/synolog/synodr.log.0"
 ```
 This script will set default values for limits in *Last run* channel:
 
