@@ -46,3 +46,5 @@ Upper error limit: 60 h (216000 s)
 ![Screenshot1](./images/nas_lun_rep_status.png)
 
 ![Screenshot1](./images/nas_share_rep_status.png)
+
+**HINT:** If you still want to use the former version, you will find it in branch v1
