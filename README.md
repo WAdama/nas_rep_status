@@ -6,7 +6,9 @@ The sensor will show the status and time passed since the last replication. The 
 
 Sensor has to be created in PRTG on your Synology device.
 
-Sensor tested on DS 918+ with DSM 6.2.4-25556 and 7.0-41890.
+Sensor tested on DS 918+ with DSM 7.2-64570.
+
+This new version will also show the amount of replicated data.
 
 ### Prerequisites
 
@@ -23,30 +25,24 @@ I personally use "Login via private key" with an user especially for monitoring 
 Place the script to /var/prtg/scriptsxml on your Synology NAS and make it executable. (You may have to create this directory structure because PRTG expects the script here.)
 
 ```
-wget https://raw.githubusercontent.com/WAdama/nas_rep_status/master/nas_rep_status.sh
-chmod +x nas_rep_status.sh
+wget https://raw.githubusercontent.com/WAdama/nas_rep_status/master/nas_lun_rep_status.sh
+or
+wget https://raw.githubusercontent.com/WAdama/nas_rep_status/master/nas_share_rep_status.sh
+chmod +x nas_lun_rep_status.sh / chmod +x nas_share_rep_status.sh
 ```
 
 On your PRTG system place the file prtg.standardlookups.nas.repstatus.ovl in *INSTALLDIR\PRTG Network Monitor\lookups\custom* and refresh it under **System Administration / Administrative Tools**
 
 In PRTG create under your device which represents your Synology a SSH custom advanced senor.
 
-Choose under "Script" this script and enter under "Parameters" the name and path of your configuration file.
+Choose under "Script" the script you need, nas_lun_rep_status.sh is for LUNs and nas_share_rep_status.sh is for shares. No configuration is needed, the script gets your replications from your system.
 
-![Screenshot1](./images/nas_rep_status.png)
-
-For the sensor create a conf file in the chosen path.
-
-The configuration file must contain the following entries according to your replicated shares and/or LUN's:
-
-```
-SHAREREPS=("Share1" "Share2" "Share3$")
-LUNREPS=("LUN1" "LUN2" "LUN3")
-```
-This script will set default values for limits in *Last run* channel:
+This script will set default values for limits in *Last run* and *Last successful replication* channel:
 
 Upper warning limit: 36 h (129600 s)
 
 Upper error limit: 60 h (216000 s)
 
-![Screenshot1](./images/nas_rep_status_sensor.png)
+![Screenshot1](./images/nas_lun_rep_status.png)
+
+![Screenshot1](./images/nas_share_rep_status.png)
