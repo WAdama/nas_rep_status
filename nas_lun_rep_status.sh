@@ -1,9 +1,8 @@
 #!/bin/bash
-#Version 2.0.0
+#Version 2.0.1
 
 mapfile -t LUNUUIDS < <(sqlite3 /volume1/@appconf/SnapshotReplication/replica.db "select target_id from plan where target_type like '1'")
-#SYNODRLOGS=$(ls -1r /var/log/synolog/synodr.*[!.xz])
-SYNODRLOGS=("/var/log/synolog/synodr.log.0" "/var/log/synolog/synodr.log")
+mapfile -t SYNODRLOGS < <( ls -1r /var/log/synolog/synodr.*[!.xz] )
 echo "<?xml version=\"10.0\" encoding=\"UTF-8\" ?><prtg>"
 for LUNUUID in "${LUNUUIDS[@]}"
 do
@@ -31,9 +30,10 @@ else
     LASTRUN=$(("$ACTTIME"-"$TIME"))
     LASTSUCCESSRUN=$(("$ACTTIME"-"${RESULT[1]}"))
     RUNTIME=$(("${RESULT[1]}"-"${RESULT[0]}"))
+    SPEED=$(("${RESULT[3]}"/"$RUNTIME"))
   fi
 fi
-echo "<result><channel>LUN $LUNREP: Last status</channel><value>$STATUS</value><ValueLookup>prtg.standardlookups.nas.repstatus</ValueLookup><ShowChart>0</ShowChart></result><result><channel>LUN $LUNREP: Last run</channel><value>$LASTRUN</value><unit>TimeSeconds</unit><LimitMode>1</LimitMode><LimitMaxWarning>129600</LimitMaxWarning><LimitMaxError>216000</LimitMaxError></result><result><channel>LUN $LUNREP: Last successful replication</channel><value>$LASTSUCCESSRUN</value><unit>TimeSeconds</unit><LimitMode>1</LimitMode><LimitMaxWarning>129600</LimitMaxWarning><LimitMaxError>216000</LimitMaxError></result><result><channel>LUN $LUNREP: Runtime</channel><value>$RUNTIME</value><unit>TimeSeconds</unit></result><result><channel>LUN $LUNREP: Data replicated</channel><value>${RESULT[3]}</value><unit>BytesDisk</unit><VolumeSize>MegaByte</VolumeSize></result>"
+echo "<result><channel>LUN $LUNREP: Last status</channel><value>$STATUS</value><ValueLookup>prtg.standardlookups.nas.repstatus</ValueLookup><ShowChart>0</ShowChart></result><result><channel>LUN $LUNREP: Last run</channel><value>$LASTRUN</value><unit>TimeSeconds</unit><LimitMode>1</LimitMode><LimitMaxWarning>129600</LimitMaxWarning><LimitMaxError>216000</LimitMaxError></result><result><channel>LUN $LUNREP: Last successful replication</channel><value>$LASTSUCCESSRUN</value><unit>TimeSeconds</unit><LimitMode>1</LimitMode><LimitMaxWarning>129600</LimitMaxWarning><LimitMaxError>216000</LimitMaxError></result><result><channel>LUN $LUNREP: Runtime</channel><value>$RUNTIME</value><unit>TimeSeconds</unit></result><result><channel>LUN $LUNREP: Data replicated</channel><value>${RESULT[3]}</value><unit>BytesDisk</unit><VolumeSize>MegaByte</VolumeSize></result><result><channel>LUN $LUNREP: Speed</channel><value>$SPEED</value><unit>SpeedDisk</unit><SpeedSize>MegaByte</SpeedSize></result>"
 done
 echo "</prtg>"
 exit
