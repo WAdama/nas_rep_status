@@ -33,7 +33,7 @@ On your PRTG system place the file prtg.standardlookups.nas.repstatus.ovl in *IN
 
 In PRTG create under your device which represents your Synology a SSH custom advanced senor.
 
-Choose under "Script" the script you need, nas_lun_rep_status.sh is for LUNs and nas_share_rep_status.sh is for shares. No configuration is needed, the script gets your replications from your system.
+Choose under "Script" the script. No configuration is needed, the script gets your replications from your system.
 
 This script will set default values for limits in *Last run* and *Last successful replication* channel:
 
