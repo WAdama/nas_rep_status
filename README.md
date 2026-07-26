@@ -25,9 +25,7 @@ I personally use "Login via private key" with an user especially for monitoring 
 Place the script to /var/prtg/scriptsxml on your Synology NAS and make it executable. (You may have to create this directory structure because PRTG expects the script here.)
 
 ```
-wget https://raw.githubusercontent.com/WAdama/nas_rep_status/master/nas_lun_rep_status.sh
-or
-wget https://raw.githubusercontent.com/WAdama/nas_rep_status/master/nas_share_rep_status.sh
+wget https://raw.githubusercontent.com/WAdama/nas_rep_status/master/nas_rep_status.sh
 chmod +x nas_lun_rep_status.sh / chmod +x nas_share_rep_status.sh
 ```
 
@@ -43,8 +41,6 @@ Upper warning limit: 36 h (129600 s)
 
 Upper error limit: 60 h (216000 s)
 
-![Screenshot1](./images/nas_lun_rep_status.png)
-
-![Screenshot1](./images/nas_share_rep_status.png)
+![Screenshot1](./images/nas_rep_status.png)
 
 **HINT:** If you still want to use the former version, you will find it in branch v1
